@@ -19,8 +19,11 @@ router.get('/:id', (req, res) => {
 
 // Rota para adicionar um novo product
 router.post('/', (req, res) => {
-  const { id_product_subgroup, id_product_brand, id_product_unit, name, gtin, value, registration_date } = req.body;
+  let { id_product_subgroup, id_product_brand, id_product_unit, name, gtin, value, registration_date } = req.body;
   let id = (productService.getProductsListLength() + 1);
+  id_product_brand = parseInt(id_product_brand);
+  id_product_unit = parseInt(id_product_unit);
+  id_product_subgroup = parseInt(id_product_subgroup); 
   newProduct = { id, id_product_subgroup, id_product_brand, id_product_unit, name, gtin, value, registration_date};
   productService.addProduct(newProduct);
   res.send('Produto adicionado com sucesso');

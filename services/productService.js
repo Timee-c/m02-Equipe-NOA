@@ -52,6 +52,8 @@ module.exports = {
   },
   addProduct: (product) => {
     products.push(product);
+    console.log(products)
+    console.log(product)
     brandService.addLinkedBrandId(parseInt(product.id_product_brand));
     unitService.addLinkedUnitId(parseInt(product.id_product_unit));
     subGrupoService.addLinkedSubGroupId(parseInt(product.id_product_subgroup));
