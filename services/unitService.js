@@ -36,8 +36,8 @@ module.exports = {
 
     let unit = unities.find(x => x.id == id)
     if (unit) {
-      if (linkedunitiesId.length > 0) {
-        linkedunitiesId.forEach(element => {
+      if (linkedUnitiesId.length > 0) {
+        linkedUnitiesId.forEach(element => {
           if (element == unit.id) {
             isUnitLinked = true;
             response = ("Unidade vinculada a algum Produto.")

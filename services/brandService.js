@@ -30,7 +30,7 @@ module.exports = {
   },
 
   updateBrand: (id,newBrand) => {
-    brand = brandList[(id-1)];
+    brand = brands[(id-1)];
     toUpdate = brand;
     toUpdate.name = newBrand.name
     toUpdate.description = newBrand.description
@@ -43,11 +43,11 @@ module.exports = {
 
     let brand = brands.find(x => x.id == id)
     if (brand) {
-      if (linkedbrandsId.length > 0) {
-        linkedbrandsId.forEach(element => {
+      if (linkedBrandsId.length > 0) {
+        linkedBrandsId.forEach(element => {
           if (element == brand.id) {
             isBrandLinked = true;
-            response = ("Marca vinculado a algum Produto.")
+            response = ("Unidade vinculada a algum Produto.")
           }
           if (isBrandLinked == false) {
             if (brands.length <= 1) {
@@ -68,7 +68,7 @@ module.exports = {
         }
       }
     } else {
-      response = ("Marca não encontrada.");
+      response = ("Unidade não encontrada.");
     }
     return response;
   },
