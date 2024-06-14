@@ -35,6 +35,7 @@ module.exports = {
   addSubGroup: (subGroup) => {
     if (!groupService.getGroupById(parseInt(subGroup.idGroup))) return 'Grupo não encontrado'
     subGroupList.push(subGroup)
+    
     groupService.addLinkedGroupId(parseInt(subGroup.idGroup));
   },
 
@@ -70,9 +71,11 @@ module.exports = {
 
 
   updateSubGroup: (id, newSubGroup) => {
-    subGroup = subGroupList[(id - 1)];
+    subGroup = subGroupList.find(item => item.id == id);
+    console.log(newSubGroup)
+    console.log(subGroupList)
     toUpdate = subGroup;
-    toUpdate.id_product_group = newSubGroup.id_product_group;
+    toUpdate.idGroup = newSubGroup.idGroup;
     toUpdate.name = newSubGroup.name;
     toUpdate.description = newSubGroup.description;
     return toUpdate
@@ -81,20 +84,23 @@ module.exports = {
   deleteSubGroupById: (id) => {
     let isSubGroupLinked = false;
     let response = "";
-    subGroup = subGroupList.filter(subGroup => subGroup.id !== id);
+    subGroup = subGroupList.find(x => x.id == id)
     if (subGroup) {
+      if(linkedSubGroupIdList > 0) {
       linkedSubGroupIdList.forEach(element => {
         if (element == subGroup.id) {
           isSubGroupLinked = true;
           response = ("Sub grupo vinculado a algum produto.")
         }
       });
+    }
       if (isSubGroupLinked == false) {
         if(subGroupList.length > 1) {
           subGroupList.filter(item => item.id != subGroup.id)
           groupService.removeLinkedGroupId(subGroup.idGroup);
         } else {
           subGroupList.pop();
+          groupService.removeLinkedGroupId(subGroup.idGroup);
         }
       }
     } else {

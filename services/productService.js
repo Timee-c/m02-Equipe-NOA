@@ -57,7 +57,7 @@ module.exports = {
     subGrupoService.addLinkedSubGroupId(parseInt(product.id_product_subgroup));
   },
   updateProduct: (id, newproduct) => {
-    product = products[(id - 1)];
+    product = products.find(item => item.id == id);
     toUpdate = product;
     toUpdate.id_product_subGroup = newproduct.id_product_subGroup;
     toUpdate.id_product_brand = newproduct.id_product_brand;
@@ -69,7 +69,7 @@ module.exports = {
     return toUpdate
   },
   deleteProduct: (id) => {
-    product = products.filter(product => product.id !== id);
+    product = products.find(x => x.id == id)
     if (product) {
       if(products.length > 1) {
         products.filter(item => item.id != product.id);

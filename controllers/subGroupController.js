@@ -20,22 +20,20 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { idGroup, name, description } = req.body;
+  let { idGroup, name, description } = req.body;
   let id = (subGroupService.getSubGroupsListLength() + 1);
+  idGroup = parseInt(idGroup)
   newSubGroup = { id, idGroup, name, description };
   res.status(201).send(subGroupService.addSubGroup(newSubGroup))
 });
 
 router.put('/:id', (req, res) => {
-  const { idGroup, name, description } = req.body;
-  let id = (subGroupService.getSubGroupsListLength() + 1);
-  newSubGroup = { id, idGroup, name, description };
+  let { idGroup, name, description } = req.body;
 
-  if (!subGroupService.getSubGroupById(id)) {
-    res.status(404).send('Sub Grupo não encontrado')
-    return
-  }
-  res.send(subGroupService.updateSubGroup(subGrup))
+  let id = parseInt(req.params.id);
+  idGroup = parseInt(idGroup)
+  newSubGroup = { id, idGroup, name, description };
+  res.send(subGroupService.updateSubGroup(id,newSubGroup))
 });
 
 router.delete('/:id', (req, res) => {
